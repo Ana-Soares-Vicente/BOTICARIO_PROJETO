@@ -1,5 +1,7 @@
 package pedidos.boticario.entities;
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
 import java.util.List;
@@ -20,7 +22,8 @@ public class Pedido {
     @ManyToOne
     private Cliente cliente;
 
-    @OneToMany(mappedBy = "pedido")
+    @ManyToMany(mappedBy = "pedido")
+    @JsonIgnoreProperties("pedido")
     private List<ItemPedido> itens;
 
     public Double calcularLucroTotal() {

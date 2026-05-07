@@ -1,5 +1,6 @@
 package pedidos.boticario.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -20,9 +21,12 @@ public class ItemPedido {
     private Integer quantidade;
 
     @ManyToOne
+    @JoinColumn(name = "produto_id")
     private Produto produto;
 
     @ManyToOne
+    @JoinColumn(name = "pedido_id")
+    @JsonIgnore
     private Pedido pedido;
 
     public Double calcularLucro() {
